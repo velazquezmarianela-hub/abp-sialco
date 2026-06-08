@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>SIALCO S.A. - Proyecto ABP</title>
+
+<style>
+
+:root{
+--azul:#0077b6;
+--azul2:#0096c7;
+--celeste:#90e0ef;
+--celeste2:#caf0f8;
+--blanco:#ffffff;
+--oscuro:#1e293b;
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,var(--celeste2),var(--celeste));
+overflow:hidden;
+}
+
+/*====================
+PRESENTACION
+====================*/
+
+.slide{
+display:none;
+width:100vw;
+height:100vh;
+padding:40px;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+animation:fade .7s;
+}
+
+.active{
+display:flex;
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+/*====================
+TITULOS
+====================*/
+
+h1{
+font-size:4rem;
+color:var(--azul);
+margin-bottom:20px;
+}
+
+h2{
+font-size:2.5rem;
+color:var(--azul);
+margin-bottom:20px;
+}
+
+p{
+font-size:1.3rem;
+max-width:900px;
+line-height:1.6;
+color:#333;
+}
+
+/*====================
+BOTONES
+====================*/
+
+.controls{
+position:fixed;
+bottom:20px;
+right:20px;
+z-index:1000;
+}
+
+button{
+background:var(--azul);
+color:white;
+border:none;
+padding:15px 25px;
+border-radius:12px;
+cursor:pointer;
+font-size:1rem;
+margin:5px;
+transition:.3s;
+}
+
+button:hover{
+transform:translateY(-3px);
+background:#023e8a;
+}
+
+/*====================
+TARJETAS
+====================*/
+
+.card{
+background:white;
+padding:35px;
+border-radius:25px;
+box-shadow:0 15px 35px rgba(0,0,0,.15);
+max-width:1000px;
+}
+
+/*====================
+PORTADA
+====================*/
+
+.hero{
+background:white;
+padding:50px;
+border-radius:30px;
+box-shadow:0 20px 40px rgba(0,0,0,.15);
+}
+
+.hero h1{
+font-size:5rem;
+}
+
+.hero p{
+font-size:1.5rem;
+}
+
+/*====================
+FLIP CARD
+====================*/
+
+.flip-container{
+display:flex;
+gap:40px;
+margin-top:30px;
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.flip-card{
+width:320px;
+height:280px;
+perspective:1000px;
+}
+
+.flip-inner{
+position:relative;
+width:100%;
+height:100%;
+transition:transform .8s;
+transform-style:preserve-3d;
+}
+
+.flip-card:hover .flip-inner{
+transform:rotateY(180deg);
+}
+
+.flip-front,
+.flip-back{
+position:absolute;
+width:100%;
+height:100%;
+backface-visibility:hidden;
+border-radius:20px;
+padding:25px;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.flip-front{
+background:white;
+}
+
+.flip-back{
+background:var(--azul);
+color:white;
+transform:rotateY(180deg);
+}
+
+/*====================
+BARRA PROGRESO
+====================*/
+
+.progress{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:10px;
+background:#dfefff;
+}
+
+.progress-bar{
+height:100%;
+width:25%;
+background:var(--azul);
+transition:.5s;
+}
+
+/*====================
+PREGUNTA
+====================*/
+
+.question{
+font-size:2rem;
+font-weight:bold;
+color:var(--azul);
+margin-bottom:30px;
+}
+
+/*====================
+RESPONSIVE
+====================*/
+/* ===== TIMELINE ===== */
+
+.timeline{
+display:flex;
+justify-content:center;
+align-items:center;
+flex-wrap:wrap;
+gap:15px;
+margin-top:20px;
+}
+
+.step{
+text-align:center;
+}
+
+.circle{
+width:70px;
+height:70px;
+border-radius:50%;
+background:#0077b6;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:1.5rem;
+font-weight:bold;
+margin:auto;
+}
+
+.arrow{
+font-size:2rem;
+color:#0077b6;
+}
+
+/* ===== ACORDEON ===== */
+
+.accordion{
+width:100%;
+text-align:left;
+margin-top:10px;
+font-size:1rem;
+}
+
+.panel{
+background:#f5fbff;
+padding:0 15px;
+max-height:0;
+overflow:hidden;
+transition:max-height .4s ease;
+border-radius:0 0 10px 10px;
+}
+
+/* ===== MODAL ===== */
+
+.modal{
+display:none;
+position:fixed;
+left:0;
+top:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,.6);
+z-index:9999;
+}
+
+.modal-content{
+background:white;
+width:80%;
+max-width:700px;
+margin:8% auto;
+padding:30px;
+border-radius:20px;
+position:relative;
+box-shadow:0 15px 35px rgba(0,0,0,.3);
+}
+
+.close{
+position:absolute;
+right:20px;
+top:10px;
+font-size:35px;
+cursor:pointer;
+font-weight:bold;
+}
+
+
+@media(max-width:768px){
+
+h1{
+font-size:2.8rem;
+}
+
+.hero h1{
+font-size:3rem;
+}
+
+p{
+font-size:1rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="progress">
+<div class="progress-bar" id="bar"></div>
+</div>
+
+<!-- ========================= -->
+<!-- PANTALLA 1 -->
+<!-- ========================= -->
+
+<section class="slide active">
+
+<div class="hero">
+
+<h1>SIALCO S.A.</h1>
+
+<p>
+Proyecto Final ABP
+</p>
+
+<br>
+
+<p>
+Prevención Jurídica y Continuidad Empresarial
+</p>
+
+<br>
+
+<button onclick="nextSlide()">
+Comenzar
+</button>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 2 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Pregunta Disparadora</h2>
+
+<div class="question">
+
+¿Puede una empresa poner en riesgo su continuidad por no cumplir una habilitación municipal o por negarse a reparar un daño causado a un tercero?
+
+</div>
+
+<p>
+
+Esta fue la situación que analizamos durante nuestro proyecto final sobre la empresa SIALCO S.A.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 3 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<h2>Problemas Detectados</h2>
+
+<div class="flip-container">
+
+<div class="flip-card">
+
+<div class="flip-inner">
+
+<div class="flip-front">
+
+<h3>🏢 Problema 1</h3>
+
+<br>
+
+<p>
+Oficina sin habilitación municipal
+</p>
+
+</div>
+
+<div class="flip-back">
+
+<h3>Consecuencias</h3>
+
+<br>
+
+<p>
+
+Multas<br>
+Sanciones<br>
+Clausuras<br>
+Pérdida de credibilidad
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="flip-card">
+
+<div class="flip-inner">
+
+<div class="flip-front">
+
+<h3>⚠ Problema 2</h3>
+
+<br>
+
+<p>
+Daño ocasionado a un tercero
+</p>
+
+</div>
+
+<div class="flip-back">
+
+<h3>Consecuencias</h3>
+
+<br>
+
+<p>
+
+Juicios<br>
+Costos económicos<br>
+Responsabilidad civil<br>
+Daño reputacional
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 4 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>¿Por qué es importante actuar?</h2>
+
+<p>
+
+Las consecuencias legales y económicas pueden afectar la continuidad de la empresa.
+
+<br><br>
+
+Regularizar una habilitación es menos costoso que afrontar una clausura.
+
+<br><br>
+
+Reparar un daño a tiempo es menos costoso que sostener un juicio prolongado.
+
+</p>
+
+</div>
+
+</section>
+<!-- ========================= -->
+<!-- PANTALLA 5 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<h2>Mapa de Actores Involucrados</h2>
+
+<div class="card">
+
+<p>
+Cada problema organizacional impacta sobre distintos actores.
+Hacé clic en cada actor para descubrir cómo se ve afectado.
+</p>
+
+<br>
+
+<div style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;">
+
+<button onclick="openModal('empresa')">
+🏢 Empresa
+</button>
+
+<button onclick="openModal('municipio')">
+🏛 Municipio
+</button>
+
+<button onclick="openModal('comunidad')">
+🏘 Comunidad
+</button>
+
+<button onclick="openModal('vecino')">
+🏠 Vecino afectado
+</button>
+
+<button onclick="openModal('justicia')">
+⚖ Justicia
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 6 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<h2>Línea de Impacto</h2>
+
+<div class="card">
+
+<div class="timeline">
+
+<div class="step">
+<div class="circle">1</div>
+<h3>Incumplimiento</h3>
+</div>
+
+<div class="arrow">➜</div>
+
+<div class="step">
+<div class="circle">2</div>
+<h3>Sanción</h3>
+</div>
+
+<div class="arrow">➜</div>
+
+<div class="step">
+<div class="circle">3</div>
+<h3>Pérdidas</h3>
+</div>
+
+<div class="arrow">➜</div>
+
+<div class="step">
+<div class="circle">4</div>
+<h3>Riesgo Empresarial</h3>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 7 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>¿Qué harías tú?</h2>
+
+<p>
+Si descubrieras una oficina funcionando sin habilitación municipal:
+</p>
+
+<br>
+
+<div style="display:flex;flex-direction:column;gap:15px;">
+
+<button onclick="quiz('incorrecto')">
+Ignorar el problema
+</button>
+
+<button onclick="quiz('incorrecto')">
+Esperar una inspección
+</button>
+
+<button onclick="quiz('correcto')">
+Gestionar la habilitación municipal
+</button>
+
+</div>
+
+<br>
+
+<div id="quizResult"></div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 8 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Plan Integral de Regularización Jurídica</h2>
+
+<button class="accordion">
+🏢 Habilitación Municipal
+</button>
+
+<div class="panel">
+
+<p>
+
+• Relevar normativa vigente<br>
+• Reunir documentación necesaria<br>
+• Gestionar la habilitación correspondiente
+
+</p>
+
+</div>
+
+<button class="accordion">
+⚖ Responsabilidad Civil
+</button>
+
+<div class="panel">
+
+<p>
+
+• Analizar antecedentes del caso<br>
+• Solicitar informes técnicos<br>
+• Reparar el daño ocasionado
+
+</p>
+
+</div>
+
+<button class="accordion">
+🎓 Prevención y Capacitación
+</button>
+
+<div class="panel">
+
+<p>
+
+• Diseñar procedimientos internos<br>
+• Capacitar al personal<br>
+• Reducir riesgos futuros
+
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 9 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Beneficios de la Implementación</h2>
+
+<div class="flip-container">
+
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front">
+<h3>✅ Cumplimiento</h3>
+</div>
+<div class="flip-back">
+<p>Regularización de la situación legal de la empresa.</p>
+</div>
+</div>
+</div>
+
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front">
+<h3>⚖ Menos Riesgos</h3>
+</div>
+<div class="flip-back">
+<p>Reducción de multas, sanciones y litigios judiciales.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+<br>
+
+<div class="flip-container">
+
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front">
+<h3>🏢 Imagen Institucional</h3>
+</div>
+<div class="flip-back">
+<p>Fortalece la confianza y credibilidad ante la comunidad.</p>
+</div>
+</div>
+</div>
+
+<div class="flip-card">
+<div class="flip-inner">
+<div class="flip-front">
+<h3>📈 Continuidad</h3>
+</div>
+<div class="flip-back">
+<p>Garantiza la continuidad y estabilidad organizacional.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 10 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Antes y Después del Plan</h2>
+
+<table style="width:100%;border-collapse:collapse;">
+
+<tr style="background:#0077b6;color:white;">
+<th style="padding:15px;">ANTES</th>
+<th style="padding:15px;">DESPUÉS</th>
+</tr>
+
+<tr>
+<td style="padding:15px;">Oficina sin habilitación</td>
+<td style="padding:15px;">Habilitación regularizada</td>
+</tr>
+
+<tr>
+<td style="padding:15px;">Riesgo de clausura</td>
+<td style="padding:15px;">Cumplimiento normativo</td>
+</tr>
+
+<tr>
+<td style="padding:15px;">Conflicto con tercero</td>
+<td style="padding:15px;">Daño reparado</td>
+</tr>
+
+<tr>
+<td style="padding:15px;">Posibles juicios</td>
+<td style="padding:15px;">Prevención legal</td>
+</tr>
+
+<tr>
+<td style="padding:15px;">Imagen afectada</td>
+<td style="padding:15px;">Imagen fortalecida</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 11 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<div class="card">
+
+<h2>Conclusión</h2>
+
+<p>
+
+Nuestro análisis demuestra que la prevención constituye una herramienta estratégica para la gestión empresarial.
+
+<br><br>
+
+Cumplir con las normas, asumir responsabilidades y actuar de manera preventiva permite proteger el patrimonio, fortalecer la imagen institucional y garantizar la continuidad de las organizaciones.
+
+<br><br>
+
+Por ello consideramos que el Plan Integral de Regularización Jurídica y Prevención de Riesgos Organizacionales no solo es viable, sino también necesario y conveniente para SIALCO S.A.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ========================= -->
+<!-- PANTALLA 12 -->
+<!-- ========================= -->
+
+<section class="slide">
+
+<div class="hero">
+
+<h1>¡Muchas Gracias!</h1>
+
+<p>
+
+Tecnicatura Superior en Administración
+
+<br><br>
+
+Régimen Tributario
+
+<br><br>
+
+ABP Final – SIALCO S.A.
+
+</p>
+
+<br>
+
+<button onclick="goHome()">
+
+↺ Volver al inicio
+
+</button>
+
+</div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- MODAL -->
+<!-- ========================= -->
+
+<div id="modal" class="modal">
+
+<div class="modal-content">
+
+<span class="close" onclick="closeModal()">
+&times;
+</span>
+
+<div id="modalText"></div>
+
+</div>
+
+</div>
+<div class="controls">
+
+<button onclick="prevSlide()">
+◀ Anterior
+</button>
+
+<button onclick="nextSlide()">
+Siguiente ▶
+</button>
+
+</div>
+
+<script>
+
+const slides=document.querySelectorAll('.slide');
+const bar=document.getElementById('bar');
+
+let current=0;
+
+function showSlide(index){
+
+slides.forEach(s=>s.classList.remove('active'));
+
+slides[index].classList.add('active');
+
+bar.style.width=((index+1)/slides.length)*100+"%";
+
+}
+
+function nextSlide(){
+
+if(current<slides.length-1){
+
+current++;
+
+showSlide(current);
+
+}
+
+}
+
+function prevSlide(){
+
+if(current>0){
+
+current--;
+
+showSlide(current);
+
+}
+
+}
+function prevSlide(){
+
+if(current>0){
+
+current--;
+
+showSlide(current);
+
+}
+
+}
+
+function openModal(actor){
+
+const modal=document.getElementById("modal");
+const text=document.getElementById("modalText");
+
+if(!modal || !text) return;
+
+let contenido="";
+
+switch(actor){
+
+case "empresa":
+contenido="<h2>🏢 Empresa</h2><p>Puede sufrir multas, sanciones, clausuras y pérdida de credibilidad institucional.</p>";
+break;
+
+case "municipio":
+contenido="<h2>🏛 Municipio</h2><p>Controla el cumplimiento de las habilitaciones y normativas vigentes.</p>";
+break;
+
+case "comunidad":
+contenido="<h2>🏘 Comunidad</h2><p>Se beneficia cuando las organizaciones cumplen con las normas.</p>";
+break;
+
+case "vecino":
+contenido="<h2>🏠 Vecino afectado</h2><p>Recibió daños derivados del accidente laboral protagonizado por un operario.</p>";
+break;
+
+case "justicia":
+contenido="<h2>⚖ Justicia</h2><p>Interviene cuando existen conflictos o incumplimientos legales.</p>";
+break;
+}
+
+text.innerHTML=contenido;
+modal.style.display="block";
+
+}
+
+function closeModal(){
+
+document.getElementById("modal").style.display="none";
+
+}
+function quiz(resultado){
+
+const div=document.getElementById("quizResult");
+
+if(resultado==="correcto"){
+
+div.innerHTML="<h3 style='color:green'>✓ Correcto</h3><p>La regularización permite prevenir sanciones y proteger la continuidad empresarial.</p>";
+
+}else{
+
+div.innerHTML="<h3 style='color:red'>✘ Incorrecto</h3><p>La inacción aumenta los riesgos legales, económicos y reputacionales para la empresa.</p>";
+
+}
+
+}
+
+const acc=document.getElementsByClassName("accordion");
+
+for(let i=0;i<acc.length;i++){
+
+acc[i].addEventListener("click",function(){
+
+this.classList.toggle("active");
+
+let panel=this.nextElementSibling;
+
+if(panel.style.maxHeight){
+
+panel.style.maxHeight=null;
+
+}else{
+
+panel.style.maxHeight=panel.scrollHeight + "px";
+
+}
+
+});
+
+}
+
+function goHome(){
+
+current=0;
+
+showSlide(current);
+
+window.scrollTo(0,0);
+}
+</script>
+
+</body>
+</html>
